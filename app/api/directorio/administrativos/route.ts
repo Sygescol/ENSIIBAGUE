@@ -1,14 +1,13 @@
 import { NextResponse } from "next/server";
 import { SygescolPool } from "@/config/db";
-
 export async function GET(request: Request) {
   try {
-    const [docentes, fields] = await SygescolPool.query(
-      `SELECT DISTINCT(cga.g), dcne_nom1,dcne_nom2,dcne_ape1,dcne_ape2,dcne_foto,dcne_email,dcne_genero FROM dcne INNER JOIN cga ON cga.g = dcne.i`
+    const [directivos] = await SygescolPool.query(
+      `SELECT id,nombre,cargo,imagen,genero,admco_nom1,admco_nom2,admco_ape1,admco_ape2 FROM admco WHERE id NOT IN(33,36,32,24,113,73,69,76,77,78,79,80,81) ORDER BY nombre ASC`
     );
     return NextResponse.json(
       {
-        docentes,
+        directivos,
       },
       {
         status: 200,
