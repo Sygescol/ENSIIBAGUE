@@ -1,14 +1,13 @@
 import { NextResponse } from "next/server";
-import { SygescolPool } from "@/config/db";
-
+import { WebMasterPool } from "@/config/db";
 export async function GET(request: Request) {
   try {
-    const [docentes] = await SygescolPool.query(
-      `SELECT DISTINCT(cga.g), dcne_nom1,dcne_nom2,dcne_ape1,dcne_ape2,dcne_foto,dcne_email,dcne_genero FROM dcne INNER JOIN cga ON cga.g = dcne.i`
+    const [contactanos] = await WebMasterPool.query(
+      `SELECT id, Red_Social, link FROM redes_sociales`
     );
     return NextResponse.json(
       {
-        docentes,
+        contactanos,
       },
       {
         status: 200,
