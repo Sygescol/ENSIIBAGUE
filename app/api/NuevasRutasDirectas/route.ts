@@ -6,7 +6,7 @@ export async function GET(req: Request) {
       "SELECT id,item,nombre FROM item ORDER BY item.id ASC"
     );
 
-    let NewRouterFormatted = RutasDb.map((ruta) => {
+    let NewRouterFormatted = RutasDb?.map((ruta) => {
       return {
         ...ruta,
         link: `/Items/${ruta?.item}/${ruta?.nombre}`,
